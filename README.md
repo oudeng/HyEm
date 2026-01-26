@@ -9,17 +9,25 @@ This repository contains the **reproducibility package** for the submitted paper
 
 ## Overview
 
-HyEm is a query-adaptive hyperbolic retrieval layer designed for biomedical ontology grounding in RAG (Retrieval-Augmented Generation) systems. It addresses two key challenges:
+HyEm is a **query-adaptive hyperbolic retrieval layer** for biomedical ontology grounding in RAG systems. Biomedical ontologies (HPO, DO, MeSH) are dominated by deep *is-a* hierarchies—a natural fit for hyperbolic geometry—yet production retrieval stacks rely on Euclidean vector databases.
 
-1. **Indexability**: Hyperbolic nearest-neighbor search is not a standard primitive in vector databases
-2. **Query heterogeneity**: Not every query benefits from hyperbolic geometry
+HyEm bridges this gap by solving two practical frictions:
 
-### Key Features
+1. **Deployment friction**: Hyperbolic nearest-neighbor search requires specialized indexing primitives unavailable in standard vector databases (FAISS, HNSW, etc.)
 
-- Query-adaptive mixing preserves 94--98\% of entity-centric performance while improving hierarchy tasks
-- Hyperbolic ontology embeddings deployable via standard Euclidean ANN through tangent-space indexing with radius control
-- Bi-Lipschitz analysis turns a radius budget into guidance for indexability and hierarchy capacity
-- Stratified query taxonomy isolates hierarchy-navigation vs entity-linking performance
+2. **Query heterogeneity**: Real query streams mix hierarchy-navigation tasks (*"subtypes of cardiomyopathy"*) with entity-linking tasks (*"what does cardiomyopathy mean"*). Forcing hyperbolic distance on all queries risks regressing against strong Euclidean baselines.
+
+### Key Contributions
+
+- **Indexable hyperbolic retrieval**: Radius-controlled hyperbolic embeddings deployable via standard Euclidean ANN through tangent-space indexing—no custom vector database needed
+
+- **Query-adaptive safety valve**: Lightweight gating mechanism softly mixes Euclidean semantic similarity with hyperbolic hierarchy distance, preserving **94–98%** of entity-centric baseline performance while enabling substantial gains on taxonomy-navigation queries
+
+- **Theory-guided engineering**: Bi-Lipschitz analysis translates a radius budget into explicit guidance for (i) tangent-space indexability and ANN oversampling, and (ii) hierarchical representational capacity
+
+- **Rigorous evaluation protocol**: Stratified query taxonomy isolates hierarchy-navigation vs. entity-linking performance, addressing the "hyperbolic is not always better" critique with controlled ablations
+
+**Bottom line**: HyEm makes hyperbolic geometry deployable in production RAG stacks without modifying retrieval infrastructure, while remaining robust under mixed query intents.
 
 ### Method Overview
 
