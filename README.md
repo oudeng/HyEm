@@ -1,11 +1,9 @@
-# HyEm: Radius-Controlled Hyperbolic Retrieval with Tangent-Space Indexing
+# HyEm: Query-Adaptive Hyperbolic Retrieval for Biomedical Ontologies via Euclidean Vector Indexing
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This repository contains the **reproducibility package** for the paper:
-
-> **HyEm: Query-Adaptive Hyperbolic Retrieval for Biomedical Ontologies via Euclidean Vector Indexing**  
+This repository contains the **reproducibility package** for the submitted paper.
 
 ---
 
