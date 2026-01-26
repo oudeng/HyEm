@@ -1,0 +1,16 @@
+% Candidate Pooling Ablation
+\begin{tabular}{llccc}
+\toprule
+Dataset & Metric & C_H only & C_H $\cup$ C_E & Improvement \\
+\midrule
+HPO & QE Hits@10 & 0.045 & 0.952 & +1994\% \\
+HPO & QE MRR & 0.016 & 0.815 & +4909\% \\
+HPO & QH parent Hits@10 & 0.048 & 0.234 & +388\% \\
+HPO & QM Hits@10 & 0.163 & 0.533 & +226\% \\
+\midrule
+DO & QE Hits@10 & 0.045 & 0.821 & +1737\% \\
+DO & QE MRR & 0.019 & 0.673 & +3358\% \\
+DO & QH parent Hits@10 & 0.088 & 0.202 & +130\% \\
+DO & QM Hits@10 & 0.221 & 0.469 & +112\% \\
+\bottomrule
+\end{tabular}

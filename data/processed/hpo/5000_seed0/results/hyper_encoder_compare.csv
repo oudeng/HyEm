@@ -1,0 +1,4 @@
+encoder,QH_parent_hits10,indexability_recall@10_L50,notes
+lorentz_kg,0.035,0.9990000000000001,this paper
+hgcn_tangent,0.025,0.9754999999999999,tangent-space HGCN baseline
+entailment_cones,,,planned (not implemented)

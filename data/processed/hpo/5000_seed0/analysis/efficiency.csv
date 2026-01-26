@@ -1,0 +1,4 @@
+method,index_size_mb,latency_ms,extra_ops
+euclid_text,8.03268051147461,0.10985067579895258,--
+hyem_no_gate,1.318878173828125,0.3192151430994272,adapter + rerank
+hyem_soft,9.351558685302734,0.5695826094597578,adapter + rerank + optional 2nd ANN
