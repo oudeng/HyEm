@@ -5,9 +5,7 @@
 
 This repository contains the **reproducibility package** for the paper:
 
-> **HyEm: Radius-Controlled Hyperbolic Retrieval with Tangent-Space Indexing for Biomedical Ontologies**  
-> Ou Deng, Shoji Nishimura, Atsushi Ogihara, Qun Jin  
-> Graduate School of Human Sciences / Faculty of Human Sciences, Waseda University
+> **HyEm: Query-Adaptive Hyperbolic Retrieval for Biomedical Ontologies via Euclidean Vector Indexing**  
 
 ---
 
@@ -20,10 +18,10 @@ HyEm is a query-adaptive hyperbolic retrieval layer designed for biomedical onto
 
 ### Key Features
 
-- **Radius-controlled hyperbolic embeddings** that prevent boundary pathologies
-- **Tangent-space indexing** compatible with standard Euclidean ANN (e.g., HNSW/FAISS)
-- **Query-adaptive soft mixing** between Euclidean and hyperbolic scores
-- **Lightweight and reproducible** experimental pipeline
+- Query-adaptive mixing preserves 94--98\% of entity-centric performance while improving hierarchy tasks
+- Hyperbolic ontology embeddings deployable via standard Euclidean ANN through tangent-space indexing with radius control
+- Bi-Lipschitz analysis turns a radius budget into guidance for indexability and hierarchy capacity
+- Stratified query taxonomy isolates hierarchy-navigation vs entity-linking performance
 
 ### Method Overview
 
@@ -32,17 +30,21 @@ HyEm is a query-adaptive hyperbolic retrieval layer designed for biomedical onto
 │                         HyEm Pipeline                               │
 ├─────────────────────────────────────────────────────────────────────┤
 │  Offline:                                                           │
-│    Ontology nodes v → Hyperbolic embedding x_v → Tangent vector u_v │
-│                        (radius-controlled)       (stored in ANN)    │
+│    Ontology → Hyperbolic x_v → log₀(x_v) → Tangent u_v              │
+│              (radius-controlled)              (ANN indexed)         │
 │                                                                     │
-│  Online:                                                            │
-│    Query q → Text embedding e_q → Adapter → u_q                     │
-│                    ↓                          ↓                     │
-│              Gate α(q)              ANN search → Candidates C       │
-│                    ↓                          ↓                     │
-│              Soft mixing: score = α·s_H + (1-α)·s_E                 │
-│                                      ↓                              │
-│                              Reranked top-k                         │
+│  Online (per query):                                                │
+│    Query q → Euclidean e_q → Adapter g(·) → Tangent u_q             │
+│                                                  ↓                  │
+│                                      ANN search (tangent-space)     │
+│                                                  ↓                  │
+│                                    Candidate pooling: C_H ∪ C_E     │
+│                                                  ↓                  │
+│                                          Gate: α(q) ∈ [0,1]         │
+│                                                  ↓                  │
+│                                  Rerank: score = α·s_H + (1-α)·s_E  │
+│                                                  ↓                  │
+│                                           Top-k entities            │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
