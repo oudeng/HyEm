@@ -4,14 +4,14 @@ This folder contains **revision experiments** designed to address Major Comments
 
 ## Overview of Experiments
 
-| Script | Addresses | Description |
+| Script |  Description |
 |--------|-----------|-------------|
-| `analyze_safety_valve.py` | M2 | Quantify soft mixing's "safety valve" effect on Q-E |
-| `depth_stratified_analysis.py` | M1, M2 | Stratify results by depth buckets |
-| `theoretical_scaling.py` | M1 | Plot κ(R) vs depth and theoretical scale limits |
-| `gate_robustness_test.py` | M3 | Test gate calibration on perturbed queries |
-| `candidate_pooling_ablation.py` | m3 | Quantify contribution of C_H ∪ C_E pooling |
-| `make_revision_figures.py` | All | Aggregate results into combined figures & LaTeX |
+| `analyze_safety_valve.py` |  Quantify soft mixing's "safety valve" effect on Q-E |
+| `depth_stratified_analysis.py` |  Stratify results by depth buckets |
+| `theoretical_scaling.py` |  Plot κ(R) vs depth and theoretical scale limits |
+| `gate_robustness_test.py` |  Test gate calibration on perturbed queries |
+| `candidate_pooling_ablation.py` |  Quantify contribution of C_H ∪ C_E pooling |
+| `make_revision_figures.py` | Aggregate results into combined figures & LaTeX |
 
 ---
 
@@ -30,7 +30,7 @@ python exp_ext3/make_figures.py --data_dir data/processed --out_dir paper_artifa
 
 ## Experiment Details
 
-### 1. Safety Valve Analysis (M2)
+### 1. Safety Valve Analysis
 
 **Goal:** Quantify how much soft mixing preserves Q-E performance compared to pure hyperbolic routing.
 
@@ -48,7 +48,7 @@ python exp_ext3/analyze_safety_valve.py \
 
 ---
 
-### 2. Depth-Stratified Analysis (M1, M2)
+### 2. Depth-Stratified Analysis
 
 **Goal:** Show whether hyperbolic benefits concentrate at deeper levels.
 
@@ -65,7 +65,7 @@ python exp_ext3/depth_stratified_analysis.py \
 
 ---
 
-### 3. Theoretical Scaling Analysis (M1)
+### 3. Theoretical Scaling Analysis
 
 **Goal:** Plot κ(R) = sinh(R)/R and show safe operating regime for different ontology depths.
 
@@ -83,7 +83,7 @@ python exp_ext3/theoretical_scaling.py \
 
 ---
 
-### 4. Gate Robustness Test (M3)
+### 4. Gate Robustness Test
 
 **Goal:** Test gate calibration robustness by adding noise to embeddings (simulates encoding variation from typos/paraphrases).
 
@@ -105,7 +105,7 @@ python exp_ext3/gate_robustness_test.py \
 
 ---
 
-### 5. Candidate Pooling Ablation (m3)
+### 5. Candidate Pooling Ablation
 
 **Goal:** Quantify contribution of using C_H ∪ C_E vs C_H only.
 
@@ -140,21 +140,3 @@ python exp_ext3/make_figures.py \
 - `REVISION_SUMMARY.md` - Markdown summary report
 
 ---
-
-## Expected Paper Revisions
-
-After running exp_ext3, update the paper as follows:
-
-1. **Table 2 revision:** Add "Q-E Retention" column showing soft mixing preserves >90% of Euclidean baseline
-2. **New Figure (M1):** Add theoretical scaling plot showing safe R regime for depths up to 50
-3. **Table 3 revision:** Add depth-stratified breakdown showing hyperbolic helps more at deeper levels
-4. **Section 6.5 revision:** Add gate robustness discussion
-5. **Table 8 completion:** Fill in HGCN results and discuss trade-offs
-
----
-
-## Notes
-
-- All scripts assume existing results from exp_basic/exp_ext1/exp_ext2 are available
-- Outputs are saved alongside existing results for easy integration
-- Scripts are designed to be lightweight (<1 min each on CPU)
