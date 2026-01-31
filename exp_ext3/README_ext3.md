@@ -5,7 +5,7 @@ This folder contains **revision experiments** designed to address Major Comments
 ## Overview of Experiments
 
 | Script |  Description |
-|--------|-----------|-------------|
+|--------|-------------|
 | `analyze_safety_valve.py` |  Quantify soft mixing's "safety valve" effect on Q-E |
 | `depth_stratified_analysis.py` |  Stratify results by depth buckets |
 | `theoretical_scaling.py` |  Plot κ(R) vs depth and theoretical scale limits |
