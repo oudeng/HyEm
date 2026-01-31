@@ -32,7 +32,7 @@ HyEm bridges this gap by solving two practical frictions:
 
 ### Method Overview
 
-<img src="https://github.com/oudeng/HyEm/blob/main/Fig/HyEm_pipeline.pdf" alt="Figure 1: HyEm pipeline architecture" style="width:90%;" />
+<img src="https://github.com/oudeng/HyEm/blob/main/Fig/Fig1_HyEm_pipeline.png" alt="Figure 1: HyEm pipeline architecture" style="width:90%;" />
 
 **Offline training and deployment-friendly retrieval in HyEm**
 **Offline (left)**: We train hyperbolic ontology embeddings $\{\mathbf{x}_v\}$ under an explicit radius budget $R$ (Section~\ref{sec:entity_embed}), and store only origin log-mapped vectors $\mathbf{u}_v=\log_{\mathbf{0}}(\mathbf{x}_v)$ in a standard Euclidean ANN index.
