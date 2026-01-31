@@ -266,8 +266,6 @@ python exp_ext4/aggregate_ext4_results.py \
   --subset_size 5000 --seed 0
 ```
 
-**Key Insight:** When gate accuracy drops from 100% → 70% (σ=0.3), soft mixing maintains Q-E Hits@10 > 90% while hard routing drops below 65%, demonstrating the value of soft mixing lies in graceful degradation, not perfect gate accuracy.
-
 📖 **Full instructions:** [exp_ext4/README_ext4.md](exp_ext4/README_ext4.md)
 
 ---
