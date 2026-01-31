@@ -354,7 +354,7 @@ If you use this code, please cite:
 @article{Deng2026hyem,
   title={HyEm: Query-Adaptive Hyperbolic Retrieval for Biomedical Ontologies via Euclidean Vector Indexing},
   author={Deng, Ou and Nishimura, Shoji and Ogihara, Atsushi and Jin, Qun},
-  journal={[arXiv]},
+  journal={[arXiv, coming soon...]},
   year={2026}
 }
 ```
