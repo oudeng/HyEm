@@ -215,13 +215,13 @@ Additional extended experiments address reviewer requests for stronger baselines
 
 Depth-stratified analysis, theoretical scaling, and robustness validation:
 
-| Experiment | Addresses | Purpose | Command |
-|------------|-----------|---------|---------|
-| **Safety Valve Analysis** | M2 | Quantify soft mixing's Q-E preservation | `python exp_ext3/analyze_safety_valve.py ...` |
-| **Depth-Stratified Analysis** | M1, M2 | Stratify results by depth buckets | `python exp_ext3/depth_stratified_analysis.py ...` |
-| **Theoretical Scaling** | M1 | Plot κ(R) vs depth and safe regime | `python exp_ext3/theoretical_scaling.py ...` |
-| **Gate Robustness** | M3 | Test gate calibration on perturbed queries | `python exp_ext3/gate_robustness_test.py ...` |
-| **Candidate Pooling Ablation** | m3 | Quantify C_H ∪ C_E pooling contribution | `python exp_ext3/candidate_pooling_ablation.py ...` |
+| Experiment | Purpose | Command |
+|------------|---------|---------|
+| **Safety Valve Analysis** | Quantify soft mixing's Q-E preservation | `python exp_ext3/analyze_safety_valve.py ...` |
+| **Depth-Stratified Analysis** | Stratify results by depth buckets | `python exp_ext3/depth_stratified_analysis.py ...` |
+| **Theoretical Scaling** |  Plot κ(R) vs depth and safe regime | `python exp_ext3/theoretical_scaling.py ...` |
+| **Gate Robustness** | Test gate calibration on perturbed queries | `python exp_ext3/gate_robustness_test.py ...` |
+| **Candidate Pooling Ablation** | Quantify C_H ∪ C_E pooling contribution | `python exp_ext3/candidate_pooling_ablation.py ...` |
 
 **Quick Start:**
 ```bash
