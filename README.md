@@ -32,7 +32,7 @@ HyEm bridges this gap by solving two practical frictions:
 
 ### Method Overview
 
-<img src="Fig1_HyEm_pipeline.png" alt="Figure 1: HyEm pipeline architecture" style="width:90%;" />
+<img src="https://github.com/oudeng/HyEm/blob/main/Fig/HyEm_pipeline.pdf" alt="Figure 1: HyEm pipeline architecture" style="width:90%;" />
 
 **Offline training and deployment-friendly retrieval in HyEm**
 **Offline (left)**: We train hyperbolic ontology embeddings $\{\mathbf{x}_v\}$ under an explicit radius budget $R$ (Section~\ref{sec:entity_embed}), and store only origin log-mapped vectors $\mathbf{u}_v=\log_{\mathbf{0}}(\mathbf{x}_v)$ in a standard Euclidean ANN index.
@@ -40,6 +40,7 @@ In addition, we build a Euclidean text ANN index over entity texts.
 **Online (right)**: Given a query $q$, we compute its Euclidean embedding $\mathbf{e}_q$ and map it into hyperbolic space via a compact adapter to obtain $\mathbf{x}_q$. We then retrieve candidates from both indexes and pool them by union ($C = C_H \cup C_E$).
 This candidate pooling acts as a robustness **safety net**: it preserves the strong recall of Euclidean baselines on entity-centric queries while still enabling hierarchy-aware reranking in hyperbolic space.
 Finally, we rerank the pooled candidates by combining hyperbolic hierarchy distance and Euclidean semantic similarity with a query-adaptive soft mixing weight $\alpha(q)$. Algorithm 1 summarizes the indexing and query-time steps. Note that during query processing (right), the adapter outputs the tangent vector $u_q$ directly without applying $\exp_0$; the exponential map to hyperbolic space is only computed during reranking.
+
 ---
 
 ## Quick Start
