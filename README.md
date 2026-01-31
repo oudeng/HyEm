@@ -2,7 +2,6 @@
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![DOI](https://zenodo.org/badge/1142128401.svg)](https://doi.org/10.5281/zenodo.18371905)
 
 This repository contains the **reproducibility package** for the submitted paper.
 
@@ -119,6 +118,23 @@ HyEm/
 │   ├── run_adapter_ablation.sh # Linear vs 2-layer MLP adapter
 │   └── run_hyper_encoder_compare.sh # Tangent-space HGCN baseline
 │
+├── exp_ext3/                   # Extended experiments 3 (depth, theory, robustness)
+│   ├── README_ext3.md          # Instructions for depth and robustness analysis
+│   ├── analyze_safety_valve.py # Safety valve analysis for Q-E preservation
+│   ├── depth_stratified_analysis.py # Depth-stratified performance analysis
+│   ├── theoretical_scaling.py  # Theoretical κ(R) vs depth plots
+│   ├── gate_robustness_test.py # Gate calibration under noise
+│   ├── candidate_pooling_ablation.py # C_H ∪ C_E pooling contribution
+│   ├── make_figures.py         # Aggregate analysis figures and tables
+│   └── run_all_ext3.sh         # Run all exp_ext3 analyses
+│
+├── exp_ext4/                   # Extended experiments 4 (noise robustness)
+│   ├── README_ext4.md          # Instructions for noise robustness experiments
+│   ├── noise_retrieval_test.py # End-to-end retrieval under noise
+│   ├── run_noise_retrieval.sh  # Run noise test for single dataset
+│   ├── aggregate_ext4_results.py # Aggregate results for Table 9
+│   └── run_all_ext4.sh         # Run complete exp_ext4 pipeline
+│
 ├── src/hyem/                   # Core library
 │   ├── ontology/               # OBO parsing & graph utilities
 │   ├── text/                   # Text embedding (SentenceTransformers)
@@ -178,6 +194,81 @@ Extended experiments address reviewer concerns and provide additional evidence:
 | **Theory Plot** | Visualize κ(R) bound | `python exp_ext1/plot_indexability_with_theory.py ...` |
 
 📖 **Full instructions:** [exp_ext1/README_ext1.md](exp_ext1/README_ext1.md)
+
+---
+
+### Extended Experiments 2
+
+Additional extended experiments address reviewer requests for stronger baselines and ablations:
+
+| Experiment | Purpose | Command |
+|------------|---------|---------|
+| **Realistic Q-E Baseline** | BioEncoder + synonym indexing | `bash exp_ext2/run_qe_high_baseline.sh ...` |
+| **Adapter Ablation** | Linear vs 2-layer MLP | `bash exp_ext2/run_adapter_ablation.sh ...` |
+| **Hyperbolic Encoder** | Tangent-space HGCN baseline | `bash exp_ext2/run_hyper_encoder_compare.sh ...` |
+
+📖 **Full instructions:** [exp_ext2/README_ext2.md](exp_ext2/README_ext2.md)
+
+---
+
+### Extended Experiments 3
+
+Depth-stratified analysis, theoretical scaling, and robustness validation:
+
+| Experiment | Addresses | Purpose | Command |
+|------------|-----------|---------|---------|
+| **Safety Valve Analysis** | M2 | Quantify soft mixing's Q-E preservation | `python exp_ext3/analyze_safety_valve.py ...` |
+| **Depth-Stratified Analysis** | M1, M2 | Stratify results by depth buckets | `python exp_ext3/depth_stratified_analysis.py ...` |
+| **Theoretical Scaling** | M1 | Plot κ(R) vs depth and safe regime | `python exp_ext3/theoretical_scaling.py ...` |
+| **Gate Robustness** | M3 | Test gate calibration on perturbed queries | `python exp_ext3/gate_robustness_test.py ...` |
+| **Candidate Pooling Ablation** | m3 | Quantify C_H ∪ C_E pooling contribution | `python exp_ext3/candidate_pooling_ablation.py ...` |
+
+**Quick Start:**
+```bash
+# Run all exp_ext3 analyses
+bash exp_ext3/run_all_ext3.sh hpo 5000 0
+bash exp_ext3/run_all_ext3.sh do 5000 0
+
+# Generate combined analysis figures
+python exp_ext3/make_figures.py --data_dir data/processed --out_dir paper_artifacts/ext3
+```
+
+📖 **Full instructions:** [exp_ext3/README_ext3.md](exp_ext3/README_ext3.md)
+
+---
+
+### Extended Experiments 4
+
+End-to-end retrieval robustness under query embedding noise:
+
+**Purpose:** Demonstrates that soft mixing maintains >90% retrieval performance even when gate accuracy drops to 70%, while hard routing suffers catastrophic failures on misrouted queries.
+
+| Noise Level | Simulates | Gate Accuracy |
+|-------------|-----------|---------------|
+| σ=0.0 | Clean baseline | 100% |
+| σ=0.1 | Minor typos | ~91% |
+| σ=0.2 | Moderate paraphrase | ~78% |
+| σ=0.3 | Highly uncertain | ~70% |
+
+**Quick Start:**
+```bash
+# Run complete pipeline for both datasets
+bash exp_ext4/run_all_ext4.sh 5000 0
+
+# Or run individually
+bash exp_ext4/run_noise_retrieval.sh hpo 5000 0
+bash exp_ext4/run_noise_retrieval.sh do 5000 0
+
+# Aggregate results and generate Table 9
+python exp_ext4/aggregate_ext4_results.py \
+  --data_dir data/processed \
+  --out_dir paper_artifacts/ext4 \
+  --subset_size 5000 --seed 0
+```
+
+**Key Insight:** When gate accuracy drops from 100% → 70% (σ=0.3), soft mixing maintains Q-E Hits@10 > 90% while hard routing drops below 65%, demonstrating the value of soft mixing lies in graceful degradation, not perfect gate accuracy.
+
+📖 **Full instructions:** [exp_ext4/README_ext4.md](exp_ext4/README_ext4.md)
 
 ---
 
@@ -262,8 +353,8 @@ HyEm evaluates on three query families:
 If you use this code, please cite:
 
 ```bibtex
-@article{deng2026hyem,
-  title={HyEm: Radius-Controlled Hyperbolic Retrieval with Tangent-Space Indexing for Biomedical Ontologies},
+@article{Deng2026hyem,
+  title={HyEm: Query-Adaptive Hyperbolic Retrieval for Biomedical Ontologies via Euclidean Vector Indexing},
   author={Deng, Ou and Nishimura, Shoji and Ogihara, Atsushi and Jin, Qun},
   journal={[arXiv]},
   year={2026}
